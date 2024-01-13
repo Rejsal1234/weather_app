@@ -76,7 +76,7 @@ class _WeatherState extends State<Weather> {
       final position = await Geolocator.getCurrentPosition();
       final res = await http.get(
         Uri.parse(
-            "https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=03a0de2a0e404a5ba777067b1fc94e35&units=metric"),
+            "https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=apiKey&units=metric"),
       );
       setState(() {
         _currentWeather = jsonDecode(res.body) as Map<String, dynamic>?;
