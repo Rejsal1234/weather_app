@@ -68,7 +68,7 @@ class _WeatherState extends State<Weather> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    weather.currentWeather?['name'] ?? "",
+                    weather.currentWeather?.name?.toString() ?? "",
                     style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w500,
                         fontSize: 40,
@@ -80,8 +80,7 @@ class _WeatherState extends State<Weather> {
                   SizedBox(
                     width: double.infinity,
                     child: Text(
-                      weather.currentWeather?['main']?['temp']?.toString() ??
-                          "",
+                      weather.currentWeather?.main?.temp?.toString() ?? "",
                       style: GoogleFonts.poppins(
                         fontSize: 76,
                         fontWeight: FontWeight.w400,

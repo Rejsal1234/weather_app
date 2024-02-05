@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
+import 'package:weather_app/models/weather_model.dart';
 
 class LocationWeather {
-  Map<String, dynamic>? _currentWeather;
+  WeatherModel? _currentWeather;
   bool _loading = false;
 
-  Map<String, dynamic>? get currentWeather => _currentWeather;
+  WeatherModel? get currentWeather => _currentWeather;
   bool get loading => _loading;
 
   Future<void> _getCurrentLocation() async {
@@ -49,10 +50,10 @@ class LocationWeather {
       final position = await Geolocator.getCurrentPosition();
       final res = await http.get(
         Uri.parse(
-            "https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=9acc6142fab318f48384290c4edb2491&units=metric"),
+            "https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=c978d4c5a8cbbda8e230f764017c3988&units=metric"),
       );
       if (res.statusCode >= 200 && res.statusCode < 300) {
-        _currentWeather = jsonDecode(res.body) as Map<String, dynamic>?;
+        _currentWeather = WeatherModel.fromJson(jsonDecode(res.body));
       } else {
         final error = jsonDecode(res.body) as Map<String, dynamic>?;
         throw error?["message"] ??
